@@ -90,5 +90,6 @@ CREATE TABLE PrescricaoVenda(
 	PRIMARY KEY (num_cedula, num_doente, data_consulta, substancia, num_venda)
 	FOREIGN KEY (num_venda)
 		REFERENCES VendaFarmacia(num_venda),
-	FOREIGN KEY 
+	FOREIGN KEY (num_cedula, num_doente, data_consulta, substancia)
+		REFERENCES Prescricao(num_cedula, num_doente, data_prescricao, substancia)
 );
