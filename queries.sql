@@ -7,7 +7,7 @@ FROM concelho
 
 --selecionar o concelho com mais vendas de todos os conselhos
 --para cada conselho, somar as vendas de todas as suas instituicoes
---para cada instituicao, somar as vendas todas dela 
+--para cada instituicao, somar as vendas todas dela hoje
 
 
 
@@ -29,4 +29,4 @@ FROM concelho
 --doentes que ja fizerqam analises ,mas ainda nao aviaram prescriçoes este mes 
 
 --selecionar num_doente
---da tabela consulta ^ analise ^ NOT(selecionar num_doente da tab prescricao_venda) 
+--da tabela consulta ^ analise ^ NOT(selecionar num_doente da tab prescricao_venda deste mes) 
