@@ -1,3 +1,13 @@
+DROP TABLE Regiao CASCADE;
+DROP TABLE Concelho CASCADE;
+DROP TABLE Instituicao CASCADE;
+DROP TABLE Medico CASCADE;
+DROP TABLE Consulta CASCADE;
+DROP TABLE Prescricao CASCADE;
+DROP TABLE Analise CASCADE;
+DROP TABLE VendaFarmacia CASCADE;
+DROP TABLE PrescricaoVenda CASCADE;
+
 CREATE TABLE Regiao(
 	num_regiao serial PRIMARY KEY,
 	nome VARCHAR (20) NOT NULL,
@@ -5,7 +15,7 @@ CREATE TABLE Regiao(
 );
 
 CREATE TABLE Concelho(
-	num_concelho serial,
+	num_concelho serial UNIQUE,
 	num_regiao INT NOT NULL,
 	nome VARCHAR (50) NOT NULL,
 	num_habitantes INT NOT NULL,
@@ -26,7 +36,7 @@ CREATE TABLE Instituicao(
 );
 
 CREATE TABLE Medico(
-	num_cedula INT PRIMARY KEY,
+	num_cedula INT UNIQUE PRIMARY KEY,
 	nome VARCHAR (50) NOT NULL,
 	especialidade VARCHAR (50) NOT NULL
 );
@@ -40,7 +50,7 @@ CREATE TABLE Consulta(
 	FOREIGN KEY (num_cedula)
 		REFERENCES Medico (num_cedula),
 	FOREIGN KEY (nome_instituicao)
-		REFERENCES Instituicao (nome),
+		REFERENCES Instituicao (nome)
 );
 
 CREATE TABLE Prescricao(
@@ -67,11 +77,11 @@ CREATE TABLE Analise(
 	FOREIGN KEY (num_cedula, num_doente, data_consulta)
 		REFERENCES Consulta(num_cedula, num_doente, data_consulta),
 	FOREIGN KEY (inst)
-		REFERENCES Instituicao(nome),
+		REFERENCES Instituicao(nome)
 );
 
 CREATE TABLE VendaFarmacia(
-	num_venda serial PRIMARY KEY,
+	num_venda serial UNIQUE PRIMARY KEY,
 	data_registo DATE NOT NULL,
 	substancia VARCHAR (50) NOT NULL,
 	quantidade INT NOT NULL,
@@ -87,7 +97,7 @@ CREATE TABLE PrescricaoVenda(
 	data_consulta DATE,
 	substancia VARCHAR (50) NOT NULL,
 	num_venda INT NOT NULL,
-	PRIMARY KEY (num_cedula, num_doente, data_consulta, substancia, num_venda)
+	PRIMARY KEY (num_cedula, num_doente, data_consulta, substancia, num_venda),
 	FOREIGN KEY (num_venda)
 		REFERENCES VendaFarmacia(num_venda),
 	FOREIGN KEY (num_cedula, num_doente, data_consulta, substancia)
