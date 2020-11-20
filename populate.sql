@@ -94,6 +94,8 @@ VALUES (8, 'Joana', 'cirurgia geral');
 INSERT INTO Medico
 VALUES (9, 'Igor', 'dermatologia');
 
+INSERT INTO Medico 
+VALUES(10, 'Joaquim', 'oftalmologia');
 
 INSERT INTO Consulta
 VALUES (0, 0, '2019-01-01', 'Hospital Lisboa');
@@ -128,6 +130,11 @@ VALUES (6, 12, '2020-01-05', 'Hospital Alentejano');
 INSERT INTO Consulta
 VALUES (3, 18, '2020-02-09', 'Hospital Alentejano');
 
+INSERT INTO consulta 
+VALUES(10,20,'2019-1-1', 'Hospital Obidos');
+
+INSERT INTO consulta 
+VALUES(10,30,'2019-1-1', 'Hospital Obidos');
 
 INSERT INTO Prescricao
 VALUES (0, 0, '2019-01-01', 'Aspirina', 3);
@@ -159,6 +166,11 @@ VALUES (5, 9, '2019-02-10', 'Aspirina', 3);
 INSERT INTO Prescricao
 VALUES (6, 12, '2020-01-05', 'Y', 2);
 
+INSERT INTO Prescricao 
+VALUES(10,20,'2019-1-1', 'Aspirina',1);
+
+INSERT INTO Prescricao 
+VALUES(10,30,'2019-1-1', 'Aspirina',1);
 
 INSERT INTO Analise
 VALUES (0, 'oftalmologia', 0, 0, '2019-01-01', '2019-01-01', 'a', 3, 'Hospital Lisboa'); 
