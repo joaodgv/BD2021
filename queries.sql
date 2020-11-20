@@ -11,19 +11,21 @@ ON VendaFarmacia.inst = Instituicao.nome GROUP BY (num_concelho, num_regiao));
 
 -- 2
 SELECT num_cedula, num_regiao FROM 
-(SELECT num_cedula, num_regiao, SUM(quantidade) total_qtd from Prescricao NATURAL JOIN Consulta INNER JOIN Instituicao
+(SELECT num_cedula, num_regiao, SUM(quantidade) total from Prescricao NATURAL JOIN Consulta INNER JOIN Instituicao
 ON Instituicao.nome = Consulta.nome_Instituicao
-GROUP BY (num_regiao, num_cedula)) AS foo
+WHERE data >= '2019-01-01' AND data < '2019-07-01'
+GROUP BY (num_regiao, num_cedula)) AS prescricao1
 NATURAL JOIN 
 (
-	SELECT num_regiao, MAX(total_qtd) 
+	SELECT num_regiao, MAX(total) 
 	FROM(
-		SELECT num_regiao, SUM(quantidade) total_qtd from Prescricao NATURAL JOIN Consulta INNER JOIN Instituicao
+		SELECT num_regiao, SUM(quantidade) total from Prescricao NATURAL JOIN Consulta INNER JOIN Instituicao
 		ON Instituicao.nome = Consulta.nome_Instituicao
-		GROUP BY (num_regiao, num_cedula)
-		) AS bar
-	GROUP BY num_regiao ) AS foobar
-	WHERE total_qtd = max
+        WHERE data >= '2019-01-01' AND data < '2019-07-01'
+		GROUP BY (num_regiao, num_cedula)) AS prescricao2
+	GROUP BY num_regiao ) AS regioes
+
+WHERE total= max
 );
 
 -- 3
@@ -47,6 +49,6 @@ WHERE NOT EXISTS (
 
 SELECT num_doente FROM Analise 
 EXCEPT
-SELECT num_doente FROM PrescricaoVenda
+(SELECT num_doente FROM PrescricaoVenda
 WHERE EXTRACT(MONTH FROM data) = EXTRACT(MONTH from current_date)
-AND EXTRACT(YEAR FROM data) = EXTRACT(YEAR from current_date);
+AND EXTRACT(YEAR FROM data) = EXTRACT(YEAR from current_date));
