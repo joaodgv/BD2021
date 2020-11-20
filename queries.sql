@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- 1 
 SELECT nome FROM concelho NATURAL JOIN
 (SELECT num_concelho, num_regiao, preco
