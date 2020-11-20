@@ -40,12 +40,12 @@ WHERE NOT EXISTS (
     WHERE substancia = 'Aspirina'
     AND p.num_cedula = PrescricaoVenda.num_cedula
     AND Instituicao.tipo = 'Farmácia'
-    AND EXTRACT(YEAR FROM PrescricaoVenda.data) = EXTRACT(YEAR from current_date)
+    AND EXTRACT(YEAR FROM PrescricaoVenda.data_consulta) = EXTRACT(YEAR from current_date)
 );
 --4
 
 SELECT num_doente FROM Analise 
 EXCEPT
 SELECT num_doente FROM PrescricaoVenda
-WHERE EXTRACT(MONTH FROM data) = EXTRACT(MONTH from current_date)
-AND EXTRACT(YEAR FROM data) = EXTRACT(YEAR from current_date);
+WHERE EXTRACT(MONTH FROM data_consulta) = EXTRACT(MONTH from current_date)
+AND EXTRACT(YEAR FROM data_consulta) = EXTRACT(YEAR from current_date);
