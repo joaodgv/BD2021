@@ -5,6 +5,36 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>BD 2020/2021</title>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+		function sendInst() {
+			axios.get('/api/inserir', {
+				params: {
+					inserir: "pres",
+					nome: document.forms["pres"]["nCedula"].value,
+					tipo: document.forms["pres"]["nDoente"].value,
+					nRegiao: document.forms["pres"]["data"].value,
+					nConcelho: document.forms["pres"]["subs"].value,
+					nConcelho: document.forms["pres"]["qtd"].value,
+				}
+			}).then().catch((error) => {
+				console.log(error);
+			})
+		}
+
+		function sendMed() {
+			axios.get('/api/inserir', {
+				params: {
+					inserir: "med",
+					nCedula: document.forms["med"]["nCedula"].value,
+					nome: document.forms["med"]["nome"].value,
+					esp: document.forms["med"]["esp"].value,
+				}
+			}).then().catch((error) => {
+				console.log(error);
+			})
+		}
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-dark bg-dark">
@@ -12,10 +42,44 @@
 	</nav>
 	<div class="d-flex" style="margin: 20px;">
 		<div class="container justify-content-center">
-			<h3 class="justify-content-center">Inserir Instituição</h3>
+			<h3 style="text-align: center;">Inserir Prescrição</h3>
+			<div class="container justify-content-center">
+				<form class="d-flex flex-column justify-content-center" name="pres" action="" onsubmit="return sendInst()">
+					<label>Numero Cédula:</label>
+					<input type="text" id="nCedula" value="">
+					<label>Numero Doente:</label>
+					<input type="text" id="nDoente" value="">
+					<label>Data:</label>
+					<input type="date" id="data" value="">
+					<label>Substância:</label>
+					<input type="text" id="subs" value=""><br>
+					<label>Quantidade:</label>
+					<input type="text" id="qtd" value=""><br>
+					<button type="submit" style="width: 100px; height: 50px;">Inserir</button>
+				</form>
+			</div>
 		</div>
 		<div class="container justify-content-center">
-			<h3 class="justify-content-center">Inserir Médico</h3>
+			<h3 style="text-align: center;">Inserir Análise</h3>
+			<form class="d-flex flex-column justify-content-center" name="ana" action="" onsubmit="return sendMed()">
+				<label for="">Especialidade:</label>
+				<input type="text" id="nCedula">
+				<label for="">Numero Cédula:</label>
+				<input type="text" id="nome">
+				<label for="">Numero Doente:</label>
+				<input type="text" id="esp"><br>
+				<label for="">Data Consulta:</label>
+				<input type="date" id="esp"><br>
+				<label for="">Data Registo:</label>
+				<input type="date" id="esp"><br>
+				<label for="">Nome:</label>
+				<input type="text" id="esp"><br>
+				<label for="">Quantidade:</label>
+				<input type="text" id="esp"><br>
+				<label for="">Intituição:</label>
+				<input type="text" id="esp"><br>
+				<button type="submit" style="width: 100px; height: 50px;">Inserir</button>
+			</form>
 		</div>
 	</div>
 </body>
