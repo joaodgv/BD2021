@@ -1,8 +1,9 @@
 -- 1 
 SELECT nome FROM Concelho NATURAL JOIN
-(SELECT num_concelho, num_regiao, preco
+(SELECT num_concelho, num_regiao, preco, data_registo
 FROM VendaFarmacia INNER JOIN Instituicao
-ON VendaFarmacia.inst = Instituicao.nome) AS foo
+ON VendaFarmacia.inst = Instituicao.nome
+WHERE data_registo = current_date) AS vendas
 GROUP BY nome
 HAVING SUM(preco) >= ALL
 (SELECT SUM(preco) FROM VendaFarmacia INNER JOIN Instituicao
