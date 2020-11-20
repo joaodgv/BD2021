@@ -1,39 +1,32 @@
 -- 1 
-SELECT nome FROM Concelho NATURAL JOIN
-(SELECT num_concelho, num_regiao, preco, data_registo
-FROM VendaFarmacia INNER JOIN Instituicao
-ON VendaFarmacia.inst = Instituicao.nome
-WHERE data_registo = current_date) AS vendas
-GROUP BY nome
+SELECT concelho.nome FROM instituicao natural join vendafarmacia
+INNER JOIN Concelho on Concelho.num_concelho = instituicao.num_concelho
+where instituicao.nome = vendafarmacia.inst AND data_registo = CURRENT_DATE
+GROUP BY concelho.nome
 HAVING SUM(preco) >= ALL
-(SELECT SUM(preco) FROM VendaFarmacia INNER JOIN Instituicao
-ON VendaFarmacia.inst = Instituicao.nome GROUP BY (num_concelho, num_regiao));
+(SELECT SUM(preco) FROM instituicao natural join vendafarmacia
+INNER JOIN Concelho on Concelho.num_concelho = instituicao.num_concelho
+where instituicao.nome = vendafarmacia.inst AND data_registo = CURRENT_DATE
+GROUP BY concelho.nome);
 
 -- 2
 SELECT num_cedula, num_regiao FROM 
-(SELECT num_cedula, num_regiao, SUM(quantidade) total from Prescricao NATURAL JOIN Consulta INNER JOIN Instituicao
-ON Instituicao.nome = Consulta.nome_Instituicao
-WHERE data >= '2019-01-01' AND data < '2019-07-01'
-GROUP BY (num_regiao, num_cedula)) AS prescricao1
-NATURAL JOIN 
-(
-	SELECT num_regiao, MAX(total) 
-	FROM(
-		SELECT num_regiao, SUM(quantidade) total from Prescricao NATURAL JOIN Consulta INNER JOIN Instituicao
-		ON Instituicao.nome = Consulta.nome_Instituicao
-        WHERE data >= '2019-01-01' AND data < '2019-07-01'
-		GROUP BY (num_regiao, num_cedula)) AS prescricao2
-	GROUP BY num_regiao ) AS regioes
-
-WHERE total= max
-);
+	(SELECT num_cedula, num_regiao, COUNT(num_cedula) from prescricao natural join consulta inner join instituicao
+	on instituicao.nome = consulta.nome_instituicao
+	WHERE data_consulta >= '2019-01-01' AND data_consulta < '2019-07-01'
+	GROUP BY num_cedula, num_regiao) as foo
+	NATURAL JOIN 
+	(SELECT num_regiao, MAX(num_cedula) as num_prescricao from prescricao natural join consulta inner join instituicao
+	on instituicao.nome = consulta.nome_instituicao
+	WHERE data_consulta >= '2019-01-01' AND data_consulta < '2019-07-01'
+	GROUP BY num_regiao) as bar;
 
 -- 3
 SELECT DISTINCT num_cedula FROM PrescricaoVenda p
 WHERE NOT EXISTS (
     SELECT Instituicao.nome FROM Instituicao INNER JOIN Concelho
     ON Instituicao.num_concelho = Concelho.num_concelho
-    WHERE Concelho.nome = 'Arouca' AND Instituicao.tipo = 'Farmácia'
+    WHERE Concelho.nome = 'Arouca' AND Instituicao.tipo = 'farmacia'
 
     EXCEPT
 
@@ -42,7 +35,7 @@ WHERE NOT EXISTS (
     INNER JOIN Instituicao ON inst = Instituicao.nome
     WHERE substancia = 'Aspirina'
     AND p.num_cedula = PrescricaoVenda.num_cedula
-    AND Instituicao.tipo = 'Farmácia'
+    AND Instituicao.tipo = 'farmacia'
     AND EXTRACT(YEAR FROM PrescricaoVenda.data_consulta) = EXTRACT(YEAR from current_date)
 );
 --4
@@ -50,5 +43,5 @@ WHERE NOT EXISTS (
 SELECT num_doente FROM Analise 
 EXCEPT
 (SELECT num_doente FROM PrescricaoVenda
-WHERE EXTRACT(MONTH FROM data) = EXTRACT(MONTH from current_date)
-AND EXTRACT(YEAR FROM data) = EXTRACT(YEAR from current_date));
+WHERE EXTRACT(MONTH FROM data_consulta) = EXTRACT(MONTH from current_date)
+AND EXTRACT(YEAR FROM data_consulta) = EXTRACT(YEAR from current_date));

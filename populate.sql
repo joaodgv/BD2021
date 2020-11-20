@@ -96,10 +96,13 @@ VALUES (9, 'Igor', 'dermatologia');
 
 
 INSERT INTO Consulta
-VALUES (0, 0, '2020-01-01', 'Hospital Lisboa');
+VALUES (0, 0, '2019-01-01', 'Hospital Lisboa');
 
 INSERT INTO Consulta
-VALUES (0, 1, '2020-07-05', 'Hospital Lisboa');
+VALUES (0, 1, '2019-05-05', 'Hospital Alentejano');
+
+INSERT INTO Consulta
+VALUES (0, 20, '2019-02-05', 'Hospital Alentejano');
 
 INSERT INTO Consulta
 VALUES (1, 2, '2020-01-02', 'Hospital Alentejano');
@@ -114,7 +117,10 @@ INSERT INTO Consulta
 VALUES (4, 7, '2020-04-30', 'Hospital Algarve');
 
 INSERT INTO Consulta
-VALUES (5, 9, '2020-02-10', 'Hospital Obidos');
+VALUES (4, 4, '2020-11-20', 'Hospital Algarve');
+
+INSERT INTO Consulta
+VALUES (5, 9, '2019-02-10', 'Hospital Obidos');
 
 INSERT INTO Consulta
 VALUES (6, 12, '2020-01-05', 'Hospital Alentejano');
@@ -124,10 +130,13 @@ VALUES (3, 18, '2020-02-09', 'Hospital Alentejano');
 
 
 INSERT INTO Prescricao
-VALUES (0, 0, '2020-01-01', 'Aspirina', 3);
+VALUES (0, 0, '2019-01-01', 'Aspirina', 3);
 
 INSERT INTO Prescricao
-VALUES (0, 1, '2020-07-05', 'B', 2);
+VALUES (0, 1, '2019-05-05', 'B', 2);
+
+INSERT INTO Prescricao
+VALUES (0, 20, '2019-02-05', 'B', 2);
 
 INSERT INTO Prescricao
 VALUES (1, 2, '2020-01-02', 'C', 5);
@@ -142,17 +151,20 @@ INSERT INTO Prescricao
 VALUES (4, 7, '2020-04-30', 'D', 2);
 
 INSERT INTO Prescricao
-VALUES (5, 9, '2020-02-10', 'Aspirina', 3);
+VALUES (4, 4, '2020-11-20', 'C', 2);
+
+INSERT INTO Prescricao
+VALUES (5, 9, '2019-02-10', 'Aspirina', 3);
 
 INSERT INTO Prescricao
 VALUES (6, 12, '2020-01-05', 'Y', 2);
 
 
 INSERT INTO Analise
-VALUES (0, 'oftalmologia', 0, 0, '2020-01-01', '2020-01-01', 'a', 3, 'Hospital Lisboa'); 
+VALUES (0, 'oftalmologia', 0, 0, '2019-01-01', '2019-01-01', 'a', 3, 'Hospital Lisboa'); 
 
 INSERT INTO Analise
-VALUES (1, 'oftalmologia', 0, 1, '2020-07-05', '2020-07-05', 'b', 2, 'Hospital Lisboa');
+VALUES (1, 'oftalmologia', 0, 1, '2019-05-05', '2019-05-05', 'b', 2, 'Hospital Lisboa');
 
 INSERT INTO Analise
 VALUES (2, 'otorrinolaringologista', 2, 3, '2020-01-03', '2020-01-03', 'c', 2, 'Hospital Arouca');
@@ -168,13 +180,13 @@ VALUES (5, 'cirurgia geral', 4, 7, '2020-04-30', '2020-04-30', 'f', 2, 'Hospital
 
 
 INSERT INTO VendaFarmacia
-VALUES (0, '2020-01-01', 'Aspirina', 25, 5, 'Wells');
+VALUES (0, '2020-11-20', 'Aspirina', 25, 5, 'Wells');
 
 INSERT INTO VendaFarmacia
 VALUES (1, '2020-01-01', 'B', 25, 10, 'Maristas');
 
 INSERT INTO VendaFarmacia
-VALUES (2, '2020-12-29', 'Aspirina', 35, 2, 'Maristas');
+VALUES (2, '2020-12-29', 'Aspirina', 35, 2, 'Sao Jeronimo');
 
 INSERT INTO VendaFarmacia
 VALUES (3, '2020-02-02', 'C', 12, 5, 'Luz');
@@ -183,20 +195,25 @@ INSERT INTO VendaFarmacia
 VALUES (4, '2020-01-01', 'D', 13, 10, 'Sao Jeronimo');
 
 INSERT INTO VendaFarmacia
-VALUES (5, '2020-02-10', 'Aspirina', 3, 10, 'Maristas');
+VALUES (5, '2020-11-20', 'C', 4, 12, 'Hospital Algarve');
 
-
-INSERT INTO PrescricaoVenda
-VALUES (0, 0, '2020-01-01', 'Aspirina', 0);
-
-INSERT INTO PrescricaoVenda
-VALUES (5, 9, '2020-02-10', 'Aspirina', 5);
+INSERT INTO VendaFarmacia
+VALUES (6, '2020-02-10', 'Aspirina', 3, 10, 'Maristas');
 
 INSERT INTO PrescricaoVenda
-VALUES (0, 1, '2020-07-05', 'B', 1);
+VALUES (0, 0, '2019-01-01', 'Aspirina', 0);
+
+INSERT INTO PrescricaoVenda
+VALUES (5, 9, '2019-02-10', 'Aspirina', 6);
+
+INSERT INTO PrescricaoVenda
+VALUES (0, 1, '2019-05-05', 'B', 1);
 
 INSERT INTO PrescricaoVenda
 VALUES (2, 3, '2020-01-03', 'Aspirina', 2);
+
+INSERT INTO PrescricaoVenda
+VALUES (4, 4, '2020-11-20', 'C', 5);
 
 INSERT INTO PrescricaoVenda
 VALUES (4, 7, '2020-04-30', 'D', 4);
