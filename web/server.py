@@ -1,5 +1,17 @@
 from flask import Flask, render_template, jsonify, request
+
+## Libs postgres
+import psycopg2
+import psycopg2.extras
+
 app = Flask(__name__)
+
+## SGBD configs
+DB_HOST="db.tecnico.ulisboa.pt"
+DB_USER="ist190733"
+DB_DATABASE=DB_USER
+DB_PASSWORD="rmzx3978"
+DB_CONNECTION_STRING = "host=%s dbname=%s user=%s password=%s".format(DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD)
 
 @app.route('/')
 def index(name=None):
@@ -50,39 +62,76 @@ def inserir():
 		query = "INSERT INTO Medico VALUES ({},{},{});".format(data['nCedula'],data['nome'],data['esp'])
 	elif inserir == 'pres':
 		#handle inserir pres
+		query = "INSERT INTO Prescricao VALUES ({},{},{});".format(data['nCedula'],data['nome'],data['esp'])
 	elif inserir == 'ana':
 		#handle inserir ana
-		
+		query = "INSERT INTO Analise VALUES ({},{},{});".format(data['nCedula'],data['nome'],data['esp'])
+	
+	reply = searchQuery(query)
+
 	return jsonify(True)
 
 @app.route('/api/remover', methods=['GET', 'POST'])
 def remover():
-	inserir = request.args.get('remover')
+	remover = request.args.get('remover')
 
 	data = request.args
 
 	# TODO: falta verificacao
 
-	if inserir == 'inst':
-		#handle inserir inst
+	if remover == 'inst':
+		#handle remover inst
 		query = "DELETE FROM Instituicao WHERE name = {};".format(data['nome'])
-	elif inserir == 'med':
-		#handle inserir med
+	elif remover == 'med':
+		#handle remover med
 		query = "DELETE FROM Medico WHERE nCedula = {}".format(data['nCedula'])
-	elif inserir == 'pres':
-		#handle inserir pres
-	elif inserir == 'ana':
-		#handle inserir ana
+	elif remover == 'pres':
+		#handle remover pres
+		query = ""
+	elif remover == 'ana':
+		#handle remover ana
+		query = ""
 	return "true"
 
 @app.route('/api/editar', methods=['GET', 'POST'])
 def editar():
+	editar = request.args.get('editar')
+
+	data = request.args
+
+	# TODO: falta verificacao
+
+	if editar == 'inst':
+		#handle editar inst
+		query = "DELETE FROM Instituicao WHERE name = {};".format(data['nome'])
+	elif editar == 'med':
+		#handle editar med
+		query = "DELETE FROM Medico WHERE nCedula = {}".format(data['nCedula'])
+	elif editar == 'pres':
+		#handle editar pres
+		query = ""
+	elif editar == 'ana':
+		#handle editar ana
+		query = ""
+
 	return "true"
 
 def searchQuery(query):
 	# Function that searches the DB and returns the result of the query
 
-	return None
+	dbConn=None
+	cursor=None
+	try:
+		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+		cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+		cursor.execute(query)
+	except Exception as e:
+		return str(e) #Renders a page with the error.
+	finally:
+		cursor.close()
+		dbConn.close()
+
+	return True
 
 if __name__ == '__main__':
    app.run()
