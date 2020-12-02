@@ -7,6 +7,26 @@
 	<title>BD 2020/2021</title>
 </head>
 <body>
-	
+	{% if cursor %}
+	<table border="2px">
+		<thead>
+		<tr>
+			{% for record in cursor %}
+				
+			{% endfor %}
+		</thead>
+		<tbody>
+			{% for record in cursor %}
+				<tr>
+					<td>{{ record[0] }}</td>
+					<td>{{ record[1] }}</td>
+					<td>{{ record[2] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+		<p> Erro: ao obter dados da base de dados!</p>
+	{% endif %}
 </body>
 </html>

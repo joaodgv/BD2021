@@ -7,6 +7,27 @@
 	<title>BD 2020/2021</title>
 </head>
 <body>
-	
+	<form action="api/listarSub" method="post">
+		<label>Número Cédula</label>
+		<input type="number" name="nCedula">
+		<label>Mês</label>
+		<input type="number" name="mes">
+		<input type="submit" value="Listar">
+	</form>
+	{% if cursor %}
+	<table border="2px">
+		<thead>
+		<tr>
+			<td>Substância</td>
+		</thead>
+		<tbody>
+			{% for record in cursor %}
+				<tr>
+				<td>{{ record[0] }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% endif %}
 </body>
 </html>

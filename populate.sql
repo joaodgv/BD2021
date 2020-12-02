@@ -192,25 +192,25 @@ VALUES (5, 'cirurgia geral', 4, 7, '2020-04-30', '2020-04-30', 'f', 2, 'Hospital
 
 
 INSERT INTO VendaFarmacia
-VALUES (0, '2020-11-20', 'Aspirina', 25, 5, 'Wells');
+VALUES (DEFAULT, '2020-11-20', 'Aspirina', 25, 5, 'Wells');
 
 INSERT INTO VendaFarmacia
-VALUES (1, '2020-01-01', 'B', 25, 10, 'Maristas');
+VALUES (DEFAULT, '2020-01-01', 'B', 25, 10, 'Maristas');
 
 INSERT INTO VendaFarmacia
-VALUES (2, '2020-12-29', 'Aspirina', 35, 2, 'Sao Jeronimo');
+VALUES (DEFAULT, '2020-12-29', 'Aspirina', 35, 2, 'Sao Jeronimo');
 
 INSERT INTO VendaFarmacia
-VALUES (3, '2020-02-02', 'C', 12, 5, 'Luz');
+VALUES (DEFAULT, '2020-02-02', 'C', 12, 5, 'Luz');
 
 INSERT INTO VendaFarmacia
-VALUES (4, '2020-01-01', 'D', 13, 10, 'Sao Jeronimo');
+VALUES (DEFAULT, '2020-01-01', 'D', 13, 10, 'Sao Jeronimo');
 
 INSERT INTO VendaFarmacia
-VALUES (5, '2020-11-20', 'C', 4, 12, 'Hospital Algarve');
+VALUES (DEFAULT, '2020-11-20', 'C', 4, 12, 'Hospital Algarve');
 
 INSERT INTO VendaFarmacia
-VALUES (6, '2020-02-10', 'Aspirina', 3, 10, 'Maristas');
+VALUES (DEFAULT, '2020-02-10', 'Aspirina', 3, 10, 'Maristas');
 
 INSERT INTO PrescricaoVenda
 VALUES (0, 0, '2019-01-01', 'Aspirina', 0);
