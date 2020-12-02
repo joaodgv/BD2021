@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>BD 2020/2021</title>
+</head>
+<body>
+	<nav class="navbar navbar-dark bg-dark">
+		<span class="navbar-brand mb-0 h1">Base de Dados 2020/2021</span>
+	</nav>
+	<div class="d-flex" style="margin: 20px;">
+		<div class="container justify-content-center">
+			<h3 style="text-align: center;">Com Prescrição</h3>
+			<div class="container justify-content-center">
+				<form class="d-flex flex-column justify-content-center" name="com" action="api/realizar" method="POST">
+					<input type="hidden" name="realizar" value="com" />
+					<label>Data Registo:</label>
+					<input type="date" name="dataR">
+					<label>Substância:</label>
+					<input type="text" name="subs">
+					<label>Quantidade:</label>
+					<input type="number" name="qtd">
+					<label>Preço:</label>
+					<input type="number" name="preco"><br>
+					<label>Instituição:</label>
+					<input type="text" name="inst">
+					<h3>Prescrição:</h3>
+					<label>Número cédula:</label>
+					<input type="number" name="nCedula">
+					<label>Número Doente:</label>
+					<input type="number" name="nDoente"><br>
+					<label>Data Prescrição:</label>
+					<input type="date" name="dataP">
+					<label>Substância:</label>
+					<input type="text" name="subs2">
+					<label>Quantidade:</label>
+					<input type="number" name="qtd2">
+					<button type="submit" style="width: 100px; height: 50px;">Vender</button>
+				</form>
+			</div>
+		</div>
+		<div class="container justify-content-center">
+			<h3 style="text-align: center;">Sem Prescrição</h3>
+			<form class="d-flex flex-column justify-content-center" name="sem" action="api/realizar" method="POST">
+				<input type="hidden" name="realizar" value="sem" />
+				<label>Data Registo:</label>
+				<input type="date" name="dataR">
+				<label>Substância:</label>
+				<input type="text" name="subs">
+				<label>Quantidade:</label>
+				<input type="number" name="qtd">
+				<label>Preço:</label>
+				<input type="number" name="preco"><br>
+				<label>Instituição:</label>
+				<input type="text" name="inst">
+				<button type="submit" value="Submit" style="width: 100px; height: 50px;">Vender</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -67,7 +67,7 @@ CREATE TABLE Prescricao(
 CREATE TABLE Analise(
 	num_analise serial PRIMARY KEY,
 	especialidade VARCHAR (50),
-	num_cedula INT NOT NULL,
+	nm6coijum_cedula INT NOT NULL,
 	num_doente INT NOT NULL,
 	data_consulta DATE,
 	data_registo DATE NOT NULL,

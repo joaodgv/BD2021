@@ -12,10 +12,35 @@
 	</nav>
 	<div class="d-flex" style="margin: 20px;">
 		<div class="container justify-content-center">
-			<h3 class="justify-content-center">Inserir Instituição</h3>
+			<h3 class="justify-content-center">Editar Instituição</h3>
+			<div class="container justify-content-center">
+				<form class="d-flex flex-column justify-content-center" name="inst" action="api/editar" method="POST">
+					<input type="hidden" name="inserir" value="isnt" />
+					<input type="hidden" name="inserir" value="isnt" />
+					<label>Nome:</label>
+					<input type="text" name="nome">
+					<label>Tipo:</label>
+					<input type="text" name="tipo">
+					<label>Numero Regiao:</label>
+					<input type="number" name="nRegiao">
+					<label>Numero Concelho:</label>
+					<input type="number" name="nConcelho"><br>
+					<button type="submit" style="width: 100px; height: 50px;">Editar</button>
+				</form>
+			</div>
 		</div>
 		<div class="container justify-content-center">
-			<h3 class="justify-content-center">Inserir Médico</h3>
+			<h3 class="justify-content-center">Editar Médico</h3>
+			<form class="d-flex flex-column justify-content-center" name="med" action="api/editar" method="POST">
+				<input type="hidden" name="inserir" value="med" />
+				<label for="">Numero cédula:</label>
+				<input type="number" name="nCedula">
+				<label for="">Nome:</label>
+				<input type="text" name="nome">
+				<label for="">Especialidade:</label>
+				<input type="text" name="esp"><br>
+				<button type="submit" value="Submit" style="width: 100px; height: 50px;">Editar</button>
+			</form>
 		</div>
 	</div>
 </body>

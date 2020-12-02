@@ -12,10 +12,48 @@
 	</nav>
 	<div class="d-flex" style="margin: 20px;">
 		<div class="container justify-content-center">
-			<h3 class="justify-content-center">Inserir Instituição</h3>
+			<h3 style="text-align: center;">Editar Prescrição</h3>
+			<div class="container justify-content-center">
+				<form class="d-flex flex-column justify-content-center" name="pres" action="api/editar" method="POST">
+					<input type="hidden" name="inserir" value="pres" />
+					<label>Numero Cédula:</label>
+					<input type="number" name="nCedula">
+					<label>Numero Doente:</label>
+					<input type="number" name="nDoente">
+					<label>Data:</label>
+					<input type="date" name="data">
+					<label>Substância:</label>
+					<input type="text" name="subs"><br>
+					<label>Quantidade:</label>
+					<input type="number" name="qtd"><br>
+					<button type="submit" style="width: 100px; height: 50px;">Editar</button>
+				</form>
+			</div>
 		</div>
 		<div class="container justify-content-center">
-			<h3 class="justify-content-center">Inserir Médico</h3>
+			<h3 style="text-align: center;">Editar Análise</h3>
+			<form class="d-flex flex-column justify-content-center" name="ana" action="api/editar" method="POST">
+				<input type="hidden" name="inserir" value="ana" />
+				<label for="">Número Análise:</label>
+				<input type="number" name="esp">
+				<label for="">Especialidade:</label>
+				<input type="text" name="esp">
+				<label for="">Numero Cédula:</label>
+				<input type="number" name="nCedula">
+				<label for="">Numero Doente:</label>
+				<input type="number" name="nDoente"><br>
+				<label for="">Data Consulta:</label>
+				<input type="date" name="dConsulta"><br>
+				<label for="">Data Registo:</label>
+				<input type="date" name="dRegisto"><br>
+				<label for="">Nome:</label>
+				<input type="text" name="nome"><br>
+				<label for="">Quantidade:</label>
+				<input type="number" name="qtd"><br>
+				<label for="">Intituição:</label>
+				<input type="text" name="inst"><br>
+				<button type="submit" style="width: 100px; height: 50px;">Editar</button>
+			</form>
 		</div>
 	</div>
 </body>

@@ -5,33 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>BD 2020/2021</title>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<script>
-		function sendInst() {
-			axios.get('/api/remover', {
-				params: {
-					remover: "pres",
-					nCedula: document.forms["inst"]["nCedula"].value,
-					nDoente: document.forms["inst"]["nDoente"].value,
-					dataPres: document.forms["inst"]["data"].value,
-					subs: document.forms["inst"]["subs"].value,
-				}
-			}).then().catch((error) => {
-				console.log(error);
-			})
-		}
-
-		function sendMed() {
-			axios.get('/api/remover', {
-				params: {
-					remover: "ana",
-					nCedula: document.forms["med"]["nCedula"].value,
-				}
-			}).then().catch((error) => {
-				console.log(error);
-			})
-		}
-	</script>
 </head>
 <body>
 	<nav class="navbar navbar-dark bg-dark">
@@ -41,24 +14,24 @@
 		<div class="container justify-content-center">
 			<h3 style="text-align: center;">Remover Prescrição</h3>
 			<div class="container justify-content-center">
-				<form class="d-flex flex-column justify-content-center" name="pres" action="" onsubmit="return sendInst()">
+				<form class="d-flex flex-column justify-content-center" name="pres" action="api/remover" method="POST">
 					<label>Numero Cédula:</label>
-					<input type="text" id="nCedula" value="">
+					<input type="number" name="nCedula">
 					<label>Numero Doente:</label>
-					<input type="text" id="nDoente" value="">
-					<label>Data da Prescrição:</label>
-					<input type="text" id="data" value="">
+					<input type="number" name="nDoente">
+					<label>Data da Consulta:</label>
+					<input type="date" name="data">
 					<label>Substância:</label>
-					<input type="text" id="subs" value="">
+					<input type="text" name="subs">
 					<button type="submit" style="width: 100px; height: 50px;">Remover</button>
 				</form>
 			</div>
 		</div>
 		<div class="container justify-content-center">
 			<h3 style="text-align: center;">Remover Análise</h3>
-			<form class="d-flex flex-column justify-content-center" name="ana" action="" onsubmit="return sendMed()">
+			<form class="d-flex flex-column justify-content-center" name="ana" action="api/remover" method="POST">
 				<label for="">Numero cédula:</label>
-				<input type="text" id="nCedula">
+				<input type="number" name="nCedula">
 				<button type="submit" style="width: 100px; height: 50px;">Remover</button>
 			</form>
 		</div>
