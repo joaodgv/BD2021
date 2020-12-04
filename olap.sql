@@ -10,7 +10,7 @@ ORDER BY (mes,ano) ASC;
 
 2--
 
-SELECT num_concelho, dia_da_semana, mes, substancia, SUM(quant) as quantidade_total, AVG(quant) as media_prescricoes_diarias
+SELECT d_instituicao.num_concelho, d_tempo.dia_da_semana, d_tempo.mes, f_presc_venda.substancia, SUM(id_presc_venda) as quantidade_total, AVG(id_presc_venda) as media_prescricoes_diarias
 FROM f_presc_venda 
 NATURAL JOIN d_tempo
 NATURAL JOIN  d_instituicao
