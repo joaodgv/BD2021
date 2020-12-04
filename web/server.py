@@ -168,21 +168,19 @@ def editar(name=None):
 def realizarAPI(name=None):
 	pres = request.form["realizar"]
 
-	print(request.form)
-
 	if (pres=="com" and (request.form["subs"] != request.form["subs2"] or request.form["qtd"] != request.form["qtd2"])):
 		return render_template('Reply/erro.html')
 	elif (pres == 'com'):
 		#do both queries
 		query1 = "INSERT INTO Prescricao VALUES (%s,%s,'%s','%s',%s);" % (request.form["nCedula"],request.form["nDoente"], request.form["dataP"],request.form["subs2"],request.form["qtd2"])
-		query2 = "INSERT INTO VendaFarmacia VALUES ('%s','%s',%s,%s,'%s');" % (request.form["dataR"],request.form["subs"],request.form["qtd"],request.form["preco"],request.form["inst"])
+		query2 = "INSERT INTO VendaFarmacia VALUES (DEFAULT,'%s','%s',%s,%s,'%s');" % (request.form["dataR"],request.form["subs"],request.form["qtd"],request.form["preco"],request.form["inst"])
 		query3 = "SELECT num_venda FROM VendaFarmacia ORDER BY num_venda DESC LIMIT 1;"
 		
 		searchQuery(query1)
 		searchQuery(query2)
-		reply = searchQuery(query3)
+		val = searchQuery(query3)
 
-		query4 = "INSERT INTO VendaPrescricao VALUES (%s);" % ('hi')
+		query4 = "INSERT INTO PrescricaoVenda VALUES (%s,%s,%s,%s);" % (request.form["nCedula"],request.form["nDoente"], request.form["dataP"],request.form["subs2"])
 		searchQuery(query4)
 		
 	else:
@@ -191,19 +189,47 @@ def realizarAPI(name=None):
 
 	return render_template('Inserir/realizar.html')
 
-def searchQuery(query):
-	# Function that searches the DB and returns the result of the query
+@app.route("/listarSub")
+def listarSub():
+	return render_template('Listar/listarSub.html',cursor=None)
+
+@app.route("/api/listarSub", methods=["POST"])
+def listarSubApi():
 	dbConn=None
 	cursor=None
 	try:
 		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
 		cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-		cursor.execute(query)
+		cursor.execute("SELECT DISTINCT substancia from Prescricao WHERE num_cedula=%s AND EXTRACT(MONTH FROM data_prescricao)=%s AND EXTRACT(YEAR FROM data_prescricao) = EXTRACT(YEAR from current_date);" % (request.form["nCedula"],request.form["mes"]))
 		dbConn.commit()
+		return render_template('Listar/listarSub.html', cursor=cursor)
 	except Exception as e:
 		return str(e) #Renders a page with the error.
 	finally:
 		cursor.close()
+		dbConn.close()
+
+@app.route("/listarVal")
+def listarVal():
+	return render_template('Listar/listarVal.html')
+
+def searchQuery(query):
+	# Function that searches the DB and returns the result of the query
+	dbConn=None
+	cursor=None
+	var array = []
+	try:
+		dbConn = psycopg2.connect(DB_CONNECTION_STRING)
+		cursor = dbConn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+		cursor.execute(query)
+		dbConn.commit()
+		for x in cursor:
+			array.append(x)
+		return array
+	except Exception as e:
+		return str(e) #Renders a page with the error.
+	finally:
+		#cursor.close()
 		dbConn.close()
 
 	return cursor
